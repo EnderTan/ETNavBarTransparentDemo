@@ -142,10 +142,17 @@ extension UINavigationController {
                 }
                 
             } else {
+                //iOS 9 系统需要设置整个view
+                 if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView {
+                    adaptiveBackdrop.alpha = alpha
+                    return
+                }
+                /*
                 if let adaptiveBackdrop = valueForKey("_adaptiveBackdrop") as? UIView , let backdropEffectView = adaptiveBackdrop.value(forKey: "_backdropEffectView") as? UIView {
                     backdropEffectView.alpha = alpha
                     return
                 }
+                */
             }
         }
         
