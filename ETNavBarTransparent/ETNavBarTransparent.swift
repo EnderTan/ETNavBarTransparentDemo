@@ -67,7 +67,7 @@ extension UINavigationController {
       }
     }
   
-    func et_updateInteractiveTransition(_ percentComplete: CGFloat) {
+    @objc dynamic func et_updateInteractiveTransition(_ percentComplete: CGFloat) {
         guard let topViewController = topViewController, let coordinator = topViewController.transitionCoordinator else {
             et_updateInteractiveTransition(percentComplete)
             return
@@ -113,13 +113,13 @@ extension UINavigationController {
         return UIColor(red: nowRed, green: nowGreen, blue: nowBlue, alpha: nowAlpha)
     }
     
-    func et_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
+    @objc dynamic func et_popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewController.navBarBgAlpha)
         navigationBar.tintColor = viewController.navBarTintColor
         return et_popToViewController(viewController, animated: animated)
     }
     
-    func et_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
+    @objc dynamic func et_popToRootViewControllerAnimated(_ animated: Bool) -> [UIViewController]? {
         setNeedsNavigationBackground(alpha: viewControllers.first?.navBarBgAlpha ?? 0)
         navigationBar.tintColor = viewControllers.first?.navBarTintColor
         return et_popToRootViewControllerAnimated(animated)
