@@ -155,7 +155,9 @@ extension UINavigationController {
     }
 }
 
-extension UINavigationController: UINavigationBarDelegate {
+protocol ETNavBarTransparentNavigationBarDelegate: UINavigationBarDelegate {}
+
+extension UINavigationController: ETNavBarTransparentNavigationBarDelegate {
     
     public func navigationBar(_ navigationBar: UINavigationBar, shouldPop item: UINavigationItem) -> Bool {
         if let topVC = topViewController, let coor = topVC.transitionCoordinator, coor.initiallyInteractive {
