@@ -11,10 +11,7 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    fileprivate var statusBarShouldLight = true
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,16 +24,6 @@ class ProfileViewController: UIViewController {
         self.navBarTintColor = .white
         
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        if statusBarShouldLight {
-            return .lightContent
-        } else {
-            return .default
-        }
-    }
-    
-    
 
     @IBAction func popWithCodeAction(_ sender: UIButton) {
         _ = navigationController?.popViewController(animated: true)
@@ -92,22 +79,18 @@ extension ProfileViewController: UITableViewDelegate {
             navBarBgAlpha = navAlpha
             if navAlpha > 0.8 {
                 navBarTintColor = UIColor.defaultNavBarTintColor
-                statusBarShouldLight = false
+                statusBarStyle = .default
                 
             }else{
                 navBarTintColor = UIColor.white
-                statusBarShouldLight = true
+                statusBarStyle = .lightContent
             }
         }else{
             navBarBgAlpha = 0
             navBarTintColor = UIColor.white
-            statusBarShouldLight = true
+            statusBarStyle = .lightContent
         }
-        setNeedsStatusBarAppearanceUpdate()
-        
-        
-        
-        
+
     }
     
     

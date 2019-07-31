@@ -35,7 +35,7 @@ extension DispatchQueue {
 extension UINavigationController {
     
     override open var preferredStatusBarStyle: UIStatusBarStyle {
-        return topViewController?.preferredStatusBarStyle ?? .default
+        return (topViewController?.statusBarStyle)!
     }
     
     open override func viewDidLoad() {
@@ -250,6 +250,7 @@ extension UIViewController {
     fileprivate struct AssociatedKeys {
         static var navBarBgAlpha: CGFloat = 1.0
         static var navBarTintColor: UIColor = UIColor.defaultNavBarTintColor
+        static var statusBarStyle: UIStatusBarStyle = .default
     }
     
     open var navBarBgAlpha: CGFloat {
@@ -281,6 +282,19 @@ extension UIViewController {
         set {
             navigationController?.navigationBar.tintColor = newValue
             objc_setAssociatedObject(self, &AssociatedKeys.navBarTintColor, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
+    }
+    
+    open var statusBarStyle: UIStatusBarStyle {
+        get {
+            guard let style = objc_getAssociatedObject(self, &AssociatedKeys.statusBarStyle) as? UIStatusBarStyle else {
+                return .default
+            }
+            return style
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.statusBarStyle, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            setNeedsStatusBarAppearanceUpdate()
         }
     }
 }
